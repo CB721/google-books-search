@@ -6,7 +6,7 @@ function Navbar() {
     <nav className="navbar">
       <ul>
         <li className="home">
-          <a href="/">Google Books Home</a>
+          <a href="/">Home</a>
         </li>
         <li className="search">
           <a href="/search">Search</a>
