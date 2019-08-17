@@ -1,0 +1,8 @@
+.jumbotron {
+    height: 90vh;
+    clear: both;
+    text-align: center;
+    align-content: center;
+    width: 100%;
+    background: rgba(145, 142, 142, 0.5);
+}

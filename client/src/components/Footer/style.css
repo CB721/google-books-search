@@ -1,0 +1,24 @@
+.footer>.bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    padding: 8px;
+    font-weight: bolder;
+}
+.footer {
+    display: block;
+    background-image:  linear-gradient(to bottom right, #373B44, #4286f4);
+    height: 100px;
+    position: relative;
+    color: #fff;
+    overflow: auto;
+    text-align: right;
+    padding: 10px;
+}
+@media only screen and (max-width: 600px) {
+    .footer {
+        text-align: center;
+    }
+}
