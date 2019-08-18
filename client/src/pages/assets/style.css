@@ -16,3 +16,6 @@
   color: #fff;
   margin: 50px;
 }
+#red-error {
+  color: rgb(191, 0, 0);
+}

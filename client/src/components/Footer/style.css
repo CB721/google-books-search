@@ -9,7 +9,7 @@
 }
 .footer {
     display: block;
-    background-image:  linear-gradient(to bottom right, #373B44, #4286f4);
+    background-image:  linear-gradient(to top left, #373B44, #4286f4);
     height: 100px;
     position: absolute;
     width: 100%;

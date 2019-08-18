@@ -1,26 +1,25 @@
 import React from "react";
-import "./style.css";
 
-export function Input(props) {
+function SearchForm(props) {
   return (
-    <div className="form-group">
-      <input className="form-control" {...props} />
-    </div>
+    <form>
+      <div className="form-group">
+        <input
+          onChange={props.handleInputChange}
+          value={props.value}
+          name="search"
+          type="text"
+          className="form-control"
+          placeholder="Find a book"
+          id="search"
+        />
+        <br />
+        <button onClick={props.handleFormSubmit} className="btn search-btn">
+          Search
+        </button>
+      </div>
+    </form>
   );
 }
 
-export function TextArea(props) {
-  return (
-    <div className="form-group">
-      <textarea className="form-control" rows="20" {...props} />
-    </div>
-  );
-}
-
-export function FormBtn(props) {
-  return (
-    <button {...props} style={{ float: "right", marginBottom: 10 }} className="search-btn">
-      {props.children}
-    </button>
-  );
-}
+export default SearchForm;

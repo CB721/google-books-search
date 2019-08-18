@@ -8,7 +8,8 @@ var bookSchema = new Schema({
     description: String,
     date: { type: Date, default: Date.now },
     cover: String,
-    googleID: String
+    link: String,
+    pages: Number
 });
 
 var Book = mongoose.model("Book", bookSchema);

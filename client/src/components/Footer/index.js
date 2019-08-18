@@ -4,7 +4,7 @@ import "./style.css";
 function Footer() {
     return <footer className="footer">
         <div className="bottom">
-            Google Book Search
+            Google Books Search
     </div>
         <span>Copyright &copy; 2019 Clint Brodar</span>
     </footer>

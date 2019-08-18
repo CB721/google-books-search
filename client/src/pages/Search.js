@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import API from '../utilities/api'
 import { Col, Row, Container } from "../components/Grid";
-import { Input, FormBtn } from "../components/Search-Form";
+import SearchForm from "../components/Search-Form";
 import { List, ListItem } from "../components/List";
 import ViewButton from "../components/View-Button";
 import videoBG from "./assets/book-footage.mp4";
@@ -8,8 +9,48 @@ import "./assets/style.css";
 
 class Search extends Component {
     state = {
-        books: ["Book 1", "Book 2", "Book 3", "Book 4", "Book 5", "Book 6", "Book 7", "Book 8", "Book 9", "Book 10"]
+        books: [],
+        search: "",
+        searchMessage: "Type in a title of a book to begin!",
+        errorStyles: "",
     };
+
+    searchBooks = query => {
+        API.googleBook(query)
+            .then(res => {
+                let results = res.data.items
+                results.map(result => {
+                    result = {
+                        key: result.id,
+                        id: result.id,
+                        title: result.volumeInfo.title,
+                        author: result.volumeInfo.authors,
+                        description: result.volumeInfo.description,
+                        cover: result.volumeInfo.imageLinks.thumbnail,
+                        link: result.volumeInfo.buyLink,
+                        pages: result.volumeInfo.pageCount,
+                    }
+                    return results;
+                })
+                this.setState({ books: results });
+                console.log(this.state.books);
+            })
+            .catch(() => this.setState({ message: "Please try a different book", errorStyles: "red-error" }));
+    };
+
+    handleInputChange = event => {
+        const value = event.target.value;
+        const name = event.target.name;
+        this.setState({
+            [name]: value
+        });
+    };
+
+    handleFormSubmit = event => {
+        event.preventDefault();
+        this.searchBooks(this.state.search);
+    };
+
     render() {
         return (
             <Container fluid>
@@ -25,13 +66,15 @@ class Search extends Component {
                     <Col size="md-12">
                         <div className="head-space" />
                         <h1 className="google-books-h1">Google Books Search</h1>
+                        <h2 className="google-books-h1" id={this.state.errorStyles}>{this.state.searchMessage}</h2>
                     </Col>
                     <Col size="md-3" />
                     <Col size="md-6">
-                        <form>
-                            <Input name="title" placeholder="Title" />
-                            <FormBtn>Search</FormBtn>
-                        </form>
+                        <SearchForm
+                            value={this.state.search}
+                            handleInputChange={this.handleInputChange}
+                            handleFormSubmit={this.handleFormSubmit}
+                        />
                     </Col>
                 </Row>
                 <Row>

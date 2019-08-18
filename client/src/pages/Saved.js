@@ -8,7 +8,7 @@ import "./assets/style.css";
 class Search extends Component {
     // Initialize this.state.books as an empty array
     state = {
-        books: ["Book 1", "Book 2", "Book 3"]
+        books: []
     };
     render() {
         return (
