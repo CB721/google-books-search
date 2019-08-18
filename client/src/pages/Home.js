@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
-import Jumbotron from "../components/Jumbotron";
 import Card from "../components/Card";
 import videoBG from "./assets/book-footage.mp4"
 import "./assets/style.css";
@@ -26,9 +25,8 @@ class Home extends Component {
         </video>
         <Row>
           <Col size="md-12">
-            <Jumbotron>
-              <h1>Google Books Search</h1>
-            </Jumbotron>
+          <div className="head-space" />
+              <h1 className="google-books-h1">Google Books Search</h1>
           </Col>
         </Row>
         <Row>

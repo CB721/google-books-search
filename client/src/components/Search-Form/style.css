@@ -1,6 +1,6 @@
 .search-btn {
     background: #4286f4;
-    border-radius: 10px;
+    border: none;
     color: white; 
 }
 .search-btn:hover {
@@ -14,4 +14,7 @@
     -webkit-transition: .1s;
     -o-transition: .1s;
     transition: .1s;
+}
+.form-group {
+    opacity: .9;
 }
