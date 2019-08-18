@@ -9,10 +9,10 @@ function Navbar() {
           <a href="/">Home</a>
         </li>
         <li className="search">
-          <a href="/search">Search</a>
+          <a href="/search">Library</a>
         </li>
         <li className="saved">
-          <a href="/saved">Saved Books</a>
+          <a href="/saved">Bookshelf</a>
         </li>
       </ul>
     </nav>

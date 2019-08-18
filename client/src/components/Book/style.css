@@ -2,10 +2,9 @@
     background: #4286f4;
     border: none;
     color: white; 
-    height: 40px;
-    text-align: center;
-}
-.search-btn:hover {
+    padding: 10px;
+  }
+  .search-btn:hover {
     background: #2f69c6;
     animation-iteration-count: 1s;
     -webkit-transform: scale(1.05);
@@ -16,7 +15,4 @@
     -webkit-transition: .1s;
     -o-transition: .1s;
     transition: .1s;
-}
-.form-group {
-    opacity: .9;
-}
+  }

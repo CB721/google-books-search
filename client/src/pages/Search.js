@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import API from '../utilities/api'
 import { Col, Row, Container } from "../components/Grid";
 import SearchForm from "../components/Search-Form";
-import { List, ListItem } from "../components/List";
-import ViewButton from "../components/View-Button";
+import { List } from "../components/List";
+import Book from "../components/Book";
 import videoBG from "./assets/book-footage.mp4";
 import "./assets/style.css";
 
@@ -27,13 +27,12 @@ class Search extends Component {
                         author: result.volumeInfo.authors,
                         description: result.volumeInfo.description,
                         cover: result.volumeInfo.imageLinks.thumbnail,
-                        link: result.volumeInfo.buyLink,
+                        link: result.volumeInfo.infoLink,
                         pages: result.volumeInfo.pageCount,
                     }
                     return results;
                 })
                 this.setState({ books: results });
-                console.log(this.state.books);
             })
             .catch(() => this.setState({ message: "Please try a different book", errorStyles: "red-error" }));
     };
@@ -82,14 +81,18 @@ class Search extends Component {
                     <Col size="md-6">
                         <List>
                             {this.state.books.map(book => (
-                                <ListItem key={book._id}>
-                                    <a href={"/books/" + book._id}>
-                                        <strong>
-                                            {book.title} by {book.author}
-                                        </strong>
-                                    </a>
-                                    <ViewButton />
-                                </ListItem>
+                                <Book
+                                    key={book.id}
+                                    title={book.volumeInfo.title}
+                                    author={book.volumeInfo.authors}
+                                    description={book.volumeInfo.description}
+                                    cover={book.volumeInfo.imageLinks.thumbnail}
+                                    link={book.volumeInfo.infoLink}
+                                    pages={book.volumeInfo.pageCount}
+                                    Button={() => (
+                                        <button className="btn search-btn">Add to bookshelf</button>
+                                    )}
+                                />
                             ))}
                         </List>
                     </Col>
