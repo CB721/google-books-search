@@ -24,8 +24,8 @@ class Search extends Component {
             .then(res =>
                 this.setState({ books: res.data, errorStyles: "" })
             )
-            .catch(err => console.log(err));
-        console.log("here the saved books: " + this.state.books.length);
+            .catch(err => console.log("Get request error: " + err));
+        console.log("here are the saved books: " + this.state.books);
     }
     componentWillUnmount() {
         this._isMounted = false;
@@ -34,7 +34,7 @@ class Search extends Component {
     render() {
         return (
             <Container fluid>
-                <video className="video-background" loop autoPlay
+                <video className="video-background" loop autoPlay playsInline
                     style={{
                         objectFit: 'cover',
                         width: '100%',
