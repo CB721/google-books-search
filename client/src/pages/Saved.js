@@ -8,12 +8,14 @@ import videoBG from "./assets/book-footage.mp4";
 import "./assets/style.css";
 
 class Search extends Component {
+    _isMounted = false;
     state = {
         books: [],
         errorStyles: "",
     };
 
     componentDidMount() {
+        this._isMounted = true;
         this.checkBookshelf();
     }
 
@@ -22,8 +24,11 @@ class Search extends Component {
             .then(res =>
                 this.setState({ books: res.data, errorStyles: "" })
             )
-            .catch(() => this.setState({ errorStyles: "red-error" }));
-            console.log(this.state.books);
+            .catch(err => console.log(err));
+        console.log("here the saved books: " + this.state.books.length);
+    }
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     render() {
@@ -41,7 +46,8 @@ class Search extends Component {
                     <Col size="md-12">
                         <div className="head-space" />
                         <h1 className="google-books-h1">Google Books Search</h1>
-                        <List>
+                        {this.state.books.length < 1 ? (
+                            <List>
                             {this.state.books.map(book => (
                                 <Book
                                     key={book.id}
@@ -54,6 +60,8 @@ class Search extends Component {
                                 />
                             ))}
                         </List>
+                        ) : (<h2 className="google-books-h1">Your bookshelf is empty</h2>)}
+                        
                     </Col>
                 </Row>
             </Container>
