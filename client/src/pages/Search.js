@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import API from '../utilities/api'
+import API from '../utilities/api';
 import { Col, Row, Container } from "../components/Grid";
 import SearchForm from "../components/Search-Form";
 import { List } from "../components/List";
@@ -32,7 +32,7 @@ class Search extends Component {
                     }
                     return results;
                 })
-                this.setState({ books: results });
+                this.setState({ books: results, errorStyles: "" });
             })
             .catch(() => this.setState({ message: "Please try a different book", errorStyles: "red-error" }));
     };
@@ -48,6 +48,20 @@ class Search extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         this.searchBooks(this.state.search);
+    };
+
+    addToBookshelf = id => {
+        const book = this.state.books.find(book => book.id === id);
+        API.saveBook({
+            _id: book.id,
+            title: book.volumeInfo.title,
+            author: book.volumeInfo.authors,
+            description: book.volumeInfo.description,
+            cover: book.volumeInfo.imageLinks.thumbnail,
+            link: book.volumeInfo.infoLink,
+            pages: book.volumeInfo.pageCount
+        })
+            .then(() => this.searchBooks());
     };
 
     render() {
@@ -83,6 +97,7 @@ class Search extends Component {
                             {this.state.books.map(book => (
                                 <Book
                                     key={book.id}
+                                    _id={book.id}
                                     title={book.volumeInfo.title}
                                     author={book.volumeInfo.authors}
                                     description={book.volumeInfo.description}
@@ -90,7 +105,11 @@ class Search extends Component {
                                     link={book.volumeInfo.infoLink}
                                     pages={book.volumeInfo.pageCount}
                                     Button={() => (
-                                        <button className="btn search-btn">Add to bookshelf</button>
+                                        <button
+                                            onClick={() => this.addToBookshelf(book.id)}
+                                            className="btn search-btn">
+                                            Add to bookshelf
+                                        </button>
                                     )}
                                 />
                             ))}

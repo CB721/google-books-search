@@ -10,11 +10,12 @@
   height: 100%;
 }
 .head-space {
-  margin-top: 225px;
+  margin-top: 200px;
 }
 .google-books-h1 {
   color: #fff;
   margin: 50px;
+  mix-blend-mode: difference;
 }
 #red-error {
   color: rgb(191, 0, 0);
