@@ -4,6 +4,7 @@ import { Col, Row, Container } from "../components/Grid";
 import SearchForm from "../components/Search-Form";
 import { List } from "../components/List";
 import Book from "../components/Book";
+import Modal from 'react-bootstrap/Modal'
 import videoBG from "./assets/book-footage.mp4";
 import "./assets/style.css";
 
@@ -13,6 +14,9 @@ class Search extends Component {
         search: "",
         searchMessage: "Type in a title of a book to begin!",
         errorStyles: "",
+        show: false,
+        modalBookTitle: "",
+        modalBookImg: "",
     };
 
     searchBooks = query => {
@@ -32,7 +36,7 @@ class Search extends Component {
                     }
                     return results;
                 })
-                this.setState({ books: results, errorStyles: "" });
+                this.setState({ books: results, errorStyles: "", searchMessage: "" });
             })
             .catch(() => this.setState({ message: "Please try a different book", errorStyles: "red-error" }));
     };
@@ -63,8 +67,19 @@ class Search extends Component {
         })
             .then(() => this.searchBooks());
     };
+    showModal = (title, cover) => {
+        this.setState({ show: true, modalBookTitle: title, modalBookImg: cover });
+    };
+    closeModal = () => {
+        this.setState({ show: false });
+    }
+    saveAndModal = (id, title, cover) => {
+        this.addToBookshelf(id);
+        this.showModal(title, cover);
+    };
 
     render() {
+
         return (
             <Container fluid>
                 <video className="video-background" loop autoPlay playsInline
@@ -106,7 +121,7 @@ class Search extends Component {
                                     pages={book.volumeInfo.pageCount}
                                     Button={() => (
                                         <button
-                                            onClick={() => this.addToBookshelf(book.id)}
+                                            onClick={() => this.saveAndModal(book.id, book.volumeInfo.title, book.volumeInfo.imageLinks.thumbnail)}
                                             className="btn search-btn">
                                             Add to bookshelf
                                         </button>
@@ -117,6 +132,21 @@ class Search extends Component {
                     </Col>
                     <Col size="md-3" />
                 </Row>
+                {/* modal content here */}
+                <Modal show={this.state.show} onHide={this.closeModal} className="modal-card">
+                    <Modal.Header closeButton>
+                        <Modal.Title>Library Card</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        You have added {this.state.modalBookTitle} to your bookshelf.
+                    <img src={this.state.modalBookImg} alt={this.state.modalBookTitle} className="modal-img" />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <button className="btn search-btn" variant="primary" onClick={this.closeModal}>
+                            Close
+                        </button>
+                    </Modal.Footer>
+                </Modal>
             </Container>
         );
     }

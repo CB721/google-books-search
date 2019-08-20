@@ -26,7 +26,7 @@ function Book({ title, author, description, cover, link, pages, Button }) {
       </Row>
       <Row>
         <Col size="12 sm-4 md-2">
-          <img className="img-thumbnail img-fluid w-100" src={cover} alt={title} />
+          <img className="img-thumbnail img-fluid w-200" src={cover} alt={title} />
           <p>{pages} pages</p>
         </Col>
         <Col size="12 sm-8 md-10">

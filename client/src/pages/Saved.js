@@ -30,6 +30,7 @@ class Search extends Component {
     componentWillUnmount() {
         this._isMounted = false;
     }
+    
 
     render() {
         return (
@@ -58,6 +59,7 @@ class Search extends Component {
                                     link={book.volumeInfo.infoLink}
                                     pages={book.volumeInfo.pageCount}
                                 />
+                                // place delete button for each saved book
                             ))}
                         </List>
                         ) : (<h2 className="google-books-h1">Your bookshelf is empty</h2>)}
