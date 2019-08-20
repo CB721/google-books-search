@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import API from '../utilities/api';
 import { Col, Row, Container } from "../components/Grid";
+import datamuse from 'datamuse';
 import SearchForm from "../components/Search-Form";
 import { List } from "../components/List";
 import Book from "../components/Book";
@@ -12,11 +13,13 @@ class Search extends Component {
     state = {
         books: [],
         search: "",
+        searchValue: "",
         searchMessage: "Type in a title of a book to begin!",
         errorStyles: "",
         show: false,
         modalBookTitle: "",
         modalBookImg: "",
+        placeHolder: "Find a book",
     };
 
     searchBooks = query => {
@@ -44,9 +47,30 @@ class Search extends Component {
     handleInputChange = event => {
         const value = event.target.value;
         const name = event.target.name;
-        this.setState({
-            [name]: value
-        });
+        this.setState({ [name]: value, searchValue: value });
+        let requestLetter = this.state.searchValue;
+        const valueArr = [];
+        valueArr.push(requestLetter);
+        let requestValue = valueArr.join("");
+        this.wordSuggestion(requestValue)
+    };
+
+    wordSuggestion = (request) => {
+        let requestURL = "/sug?s=" + request;
+        console.log(requestURL);
+        if (requestURL.length > 9) {
+            datamuse.request(requestURL)
+                .then((res) => {
+                    console.log(res[0].word);
+                    this.setState({ placeHolder: res[0].word })
+                });
+        }
+        if (requestURL.length < 10) {
+            this.setState({ placeHolder: "Find a book" })
+        }
+        if (requestURL.length > 37) {
+            this.setState({ placeHolder: "That is a long book!" })
+        }
     };
 
     handleFormSubmit = event => {
@@ -102,6 +126,7 @@ class Search extends Component {
                             value={this.state.search}
                             handleInputChange={this.handleInputChange}
                             handleFormSubmit={this.handleFormSubmit}
+                            placeHolder={this.state.placeHolder}
                         />
                     </Col>
                 </Row>

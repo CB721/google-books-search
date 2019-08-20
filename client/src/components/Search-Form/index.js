@@ -1,4 +1,5 @@
 import React from "react";
+import Dropdown from 'react-bootstrap/Dropdown';
 
 function SearchForm(props) {
   return (
@@ -10,9 +11,14 @@ function SearchForm(props) {
           name="search"
           type="text"
           className="form-control"
-          placeholder="Find a book"
+
           id="search"
+          autoComplete="off"
         />
+        <Dropdown.Menu show>
+          <Dropdown.Item eventKey="1">{props.placeHolder}</Dropdown.Item>
+        </Dropdown.Menu>
+        {/* <p>{props.placeHolder}</p> */}
         <br />
         <button onClick={props.handleFormSubmit} className="btn search-btn">
           Search
