@@ -20,6 +20,7 @@ class Search extends Component {
         modalBookTitle: "",
         modalBookImg: "",
         placeHolder: "Find a book",
+        showPara: "hide-para",
     };
 
     searchBooks = query => {
@@ -57,16 +58,15 @@ class Search extends Component {
 
     wordSuggestion = (request) => {
         let requestURL = "/sug?s=" + request;
-        console.log(requestURL);
         if (requestURL.length > 9) {
             datamuse.request(requestURL)
                 .then((res) => {
-                    console.log(res[0].word);
-                    this.setState({ placeHolder: res[0].word })
+                    let placeholder = res[0].word
+                    this.setState({ placeHolder: placeholder, showPara: "" })
                 });
         }
         if (requestURL.length < 10) {
-            this.setState({ placeHolder: "Find a book" })
+            this.setState({ placeHolder: "Find a book", showPara: "hide-para" })
         }
         if (requestURL.length > 37) {
             this.setState({ placeHolder: "That is a long book!" })
@@ -76,6 +76,7 @@ class Search extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         this.searchBooks(this.state.search);
+        this.setState({ showPara: "hide-para" });
     };
 
     addToBookshelf = id => {
@@ -122,6 +123,7 @@ class Search extends Component {
                     </Col>
                     <Col size="md-3" />
                     <Col size="md-6">
+                        <p className={this.state.showPara}>Looking for {this.state.placeHolder}?</p>
                         <SearchForm
                             value={this.state.search}
                             handleInputChange={this.handleInputChange}
@@ -158,7 +160,7 @@ class Search extends Component {
                     <Col size="md-3" />
                 </Row>
                 {/* modal content here */}
-                <Modal show={this.state.show} onHide={this.closeModal} className="modal-card">
+                <Modal show={this.state.show} onHide={this.closeModal} className="modal-card" variant="info">
                     <Modal.Header closeButton>
                         <Modal.Title>Library Card</Modal.Title>
                     </Modal.Header>
@@ -167,7 +169,7 @@ class Search extends Component {
                     <img src={this.state.modalBookImg} alt={this.state.modalBookTitle} className="modal-img" />
                     </Modal.Body>
                     <Modal.Footer>
-                        <button className="btn search-btn" variant="primary" onClick={this.closeModal}>
+                        <button className="btn search-btn" onClick={this.closeModal}>
                             Close
                         </button>
                     </Modal.Footer>

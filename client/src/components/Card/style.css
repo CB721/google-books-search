@@ -1,7 +1,7 @@
 .card {
     height: 300px;
     margin-bottom: 20px;
-    opacity: .9;
+    opacity: 1;
     border: 1px solid #4286f4;
 }
 .card-img {

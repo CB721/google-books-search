@@ -21,13 +21,16 @@
 }
 input::placeholder {
   opacity: 1;
-  text-indent: 75%;
+  /* text-indent: 85%; */
+}
+.hide-dropdown {
+  opacity: -1;
 }
 .google-books-h1 {
   font-weight: bolder;
   color: #ffffff;
   margin: 50px;
-  font-size: 8vmin;
+  font-size: 60px;
   text-align: center;
   mix-blend-mode: difference;
   font-weight: 100;
@@ -36,6 +39,25 @@ input::placeholder {
   align-items: center;
   justify-content: center;
   animation: text-flicker 3s linear infinite;
+}
+p {
+  font-weight: bolder;
+  color: #ffffff;
+  margin: 25px;
+  font-size: 30px;
+  text-align: center;
+  mix-blend-mode: difference;
+  font-weight: 100;
+  text-shadow: 5px 5px 10px #4286f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: text-flicker 3s linear infinite;
+}
+.hide-para { 
+  opacity: -1;
+  color: transparent;
+  text-shadow: none;
 }
 @keyframes text-flicker {
   0% {
@@ -98,7 +120,4 @@ input::placeholder {
   -o-transition: .1s;
   transition: .1s;
 }
-p { 
-  float: right;
-  margin-top: -4.4%;
-}
+

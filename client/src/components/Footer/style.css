@@ -1,5 +1,5 @@
 .footer>.bottom {
-    position: absolute;
+    position: relative;
     bottom: 0;
     left: 0;
     right: 0;
@@ -11,7 +11,8 @@
     display: block;
     background-image:  linear-gradient(to top left, #373B44, #4286f4);
     height: 100px;
-    position: relative;
+    /* flex-shrink: none; */
+    position: fixed;
     width: 100%;
     color: #fff;
     overflow: auto;

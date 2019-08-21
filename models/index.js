@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 const bookSchema = new Schema({
     _id: {type: String, require: true},
     title: {type: String, require: true},
-    author: {type: Array, require: true},
+    authors: {type: Array, require: true},
     description: {type: String, require: true},
-    cover: {type: String, require: true},
-    link: {type: String, require: true},
+    cover: {type: String, require: true, trim: true},
+    link: {type: String, require: true, trim: true},
     pages: {type: Number, require: true}
 });
 

@@ -22,10 +22,12 @@ class Search extends Component {
     checkBookshelf = () => {
         API.getBooks()
             .then(res =>
-                this.setState({ books: res.data, errorStyles: "" })
+                this.setState({ books: res.data }, () => {
+                    console.log(this.state.books);
+                })
             )
-            .catch(err => console.log("Get request error: " + err));
-        console.log("here are the saved books: " + this.state.books);
+            .catch(err => console.log("Get request error: " + err))
+            .finally(console.log("here are the saved books: " + this.state.books));
     }
     componentWillUnmount() {
         this._isMounted = false;
@@ -63,7 +65,6 @@ class Search extends Component {
                             ))}
                         </List>
                         ) : (<h2 className="google-books-h1">Your bookshelf is empty</h2>)}
-                        
                     </Col>
                 </Row>
             </Container>

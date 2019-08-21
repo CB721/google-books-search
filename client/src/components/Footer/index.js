@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 
 function Footer() {
-    return <footer className="footer">
+    return <footer className="footer navbar-fixed-bottom">
         <div className="bottom">
             Google Books Search
     </div>
