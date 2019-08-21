@@ -5,7 +5,7 @@ import datamuse from 'datamuse';
 import SearchForm from "../components/Search-Form";
 import { List } from "../components/List";
 import Book from "../components/Book";
-import Modal from 'react-bootstrap/Modal'
+import Modal from 'react-bootstrap/Modal';
 import videoBG from "./assets/book-footage.mp4";
 import "./assets/style.css";
 
@@ -123,7 +123,7 @@ class Search extends Component {
                     </Col>
                     <Col size="md-3" />
                     <Col size="md-6">
-                        <p className={this.state.showPara}>Looking for {this.state.placeHolder}?</p>
+                        <h4 className={this.state.showPara}>Looking for {this.state.placeHolder}?</h4>
                         <SearchForm
                             value={this.state.search}
                             handleInputChange={this.handleInputChange}

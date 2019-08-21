@@ -40,7 +40,7 @@ input::placeholder {
   justify-content: center;
   animation: text-flicker 3s linear infinite;
 }
-p {
+h4 {
   font-weight: bolder;
   color: #ffffff;
   margin: 25px;

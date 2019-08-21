@@ -3,9 +3,9 @@ import "./style.css";
 
 function DeleteBtn(props) {
   return (
-    <span className="delete-btn" {...props} role="button" tabIndex="0">
+    <button onClick={props.deleteBook} className="delete-btn">
       Delete
-    </span>
+        </button>
   );
 }
 
