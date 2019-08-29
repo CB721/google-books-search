@@ -3,7 +3,6 @@
     bottom: 0;
     left: 0;
     right: 0;
-    
     padding: 8px;
     font-weight: bolder;
 }
@@ -11,14 +10,14 @@
     display: block;
     background-image:  linear-gradient(to top left, #373B44, #4286f4);
     height: 100px;
-    /* flex-shrink: none; */
     position: fixed;
     width: 100%;
     color: #fff;
     overflow: auto;
     text-align: right;
     padding: 10px;
-    margin-bottom: -10px;
+    /* margin-bottom: 0px; */
+    bottom: 0;
 }
 @media only screen and (max-width: 600px) {
     .footer {

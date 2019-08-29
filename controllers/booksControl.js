@@ -12,12 +12,12 @@ module.exports = {
       .catch(err => console.log(err));
   },
   create: function(req, res) {
-    db.create(req.body)
+    db.create(req.query)
       .then(dbBook => res.json(dbBook))
       .catch(err => console.log(err));
   },
   update: function(req, res) {
-    db.findOneAndUpdate({ id: req.params.id }, req.body)
+    db.findOneAndUpdate({ id: req.params.id }, req.query)
       .then(dbBook => res.json(dbBook))
       .catch(err => console.log(err));
   },
@@ -28,5 +28,3 @@ module.exports = {
       .catch(err => console.log(err));
   }
 };
-
-  

@@ -22,7 +22,7 @@ export default {
       return axios.get(URL + query);
     },
     // Giphy search
-    // change query to fahrenheit 451
+    // default query as "fahrenheit 451"
     giphy: function() {
       return axios.get(BASEURL + "fahrenheit 451" + APIKEY);
     }

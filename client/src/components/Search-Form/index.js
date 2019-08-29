@@ -1,4 +1,5 @@
 import React from "react";
+import DataListInput from 'react-datalist-input';
 // import Dropdown from 'react-bootstrap/Dropdown';
 
 function SearchForm(props) {
@@ -11,19 +12,24 @@ function SearchForm(props) {
           name="search"
           type="text"
           className="form-control"
-          placeholder={props.placeHolder}
+          placeholder="Find a book"
           id="search"
           autoComplete="off"
         />
-        {/* <Dropdown.Menu show>
-          <Dropdown.Item eventKey="1">Looking for {props.placeHolder}?</Dropdown.Item>
-        </Dropdown.Menu> */}
+        <div>
+          <DataListInput
+            className=""
+            placeholder={props.placeHolder}
+            items={props.placeHolder}
+            onSelect={props.onSelect}
+          />
+        </div>
         <br />
         <button onClick={props.handleFormSubmit} className="btn search-btn">
           Search
         </button>
       </div>
-    </form>
+    </form >
   );
 }
 

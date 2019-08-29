@@ -15,7 +15,8 @@ function Book({ title, author, description, cover, link, pages, Button }) {
             <a className="btn search-btn" target="_blank" rel="noopener noreferrer" href={link}>
               Buy
             </a>
-            <Button />
+            {/* <Button /> */}
+            {Button}
           </div>
         </Col>
       </Row>

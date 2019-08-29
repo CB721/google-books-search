@@ -6,6 +6,7 @@ import SearchForm from "../components/Search-Form";
 import { List } from "../components/List";
 import Book from "../components/Book";
 import Modal from 'react-bootstrap/Modal';
+import SaveBtn from "../components/Save-Button";
 import videoBG from "./assets/book-footage.mp4";
 import "./assets/style.css";
 
@@ -19,7 +20,7 @@ class Search extends Component {
         show: false,
         modalBookTitle: "",
         modalBookImg: "",
-        placeHolder: "Find a book",
+        placeHolder: "",
         showPara: "hide-para",
     };
 
@@ -37,12 +38,22 @@ class Search extends Component {
                         cover: result.volumeInfo.imageLinks.thumbnail,
                         link: result.volumeInfo.infoLink,
                         pages: result.volumeInfo.pageCount,
+                        ISBN: result.volumeInfo.industryIdentifiers[0].identifier
                     }
                     return results;
                 })
-                this.setState({ books: results, errorStyles: "", searchMessage: "" });
+                this.setState({
+                    books: results,
+                    errorStyles: "",
+                    searchMessage: "",
+                    showPara: "hide-para"
+                });
             })
-            .catch(() => this.setState({ message: "Please try a different book", errorStyles: "red-error" }));
+            .catch(() => this.setState({
+                message: "Please try a different book",
+                errorStyles: "red-error"
+            })
+            );
     };
 
     handleInputChange = event => {
@@ -58,11 +69,20 @@ class Search extends Component {
 
     wordSuggestion = (request) => {
         let requestURL = "/sug?s=" + request;
-        if (requestURL.length > 9) {
+        if (requestURL.length > 8) {
             datamuse.request(requestURL)
                 .then((res) => {
-                    let placeholder = res[0].word
-                    this.setState({ placeHolder: placeholder, showPara: "" })
+                    let placeholder = [];
+                    let firstSuggestion = res[0].word.charAt(0).toUpperCase() + res[0].word.slice(1);
+                    let secondSuggestion = res[1].word.charAt(0).toUpperCase() + res[1].word.slice(1);
+                    let thirduggestion = res[2].word.charAt(0).toUpperCase() + res[2].word.slice(1);
+                    placeholder.push(firstSuggestion);
+                    placeholder.push(secondSuggestion);
+                    placeholder.push(thirduggestion);
+                    this.setState({
+                        placeHolder: placeholder.join(", "),
+                        showPara: ""
+                    })
                 });
         }
         if (requestURL.length < 10) {
@@ -72,6 +92,13 @@ class Search extends Component {
             this.setState({ placeHolder: "That is a long book!" })
         }
     };
+    onSelect = (selectedItem) => {
+        this.doSomething(selectedItem);
+    };
+
+    doSomething = (selectedItem) => {
+        this.setState({ search: selectedItem })
+    }
 
     handleFormSubmit = event => {
         event.preventDefault();
@@ -93,18 +120,23 @@ class Search extends Component {
             .then(() => this.searchBooks());
     };
     showModal = (title, cover) => {
-        this.setState({ show: true, modalBookTitle: title, modalBookImg: cover });
+        this.setState({
+            show: true,
+            modalBookTitle: title,
+            modalBookImg: cover
+        });
     };
     closeModal = () => {
         this.setState({ show: false });
     }
-    saveAndModal = (id, title, cover) => {
+    saveAndModal = (id, title, cover, ISBN) => {
+        console.log(ISBN);
         this.addToBookshelf(id);
         this.showModal(title, cover);
     };
 
-    render() {
 
+    render() {
         return (
             <Container fluid>
                 <video className="video-background" loop autoPlay playsInline
@@ -146,20 +178,18 @@ class Search extends Component {
                                     cover={book.volumeInfo.imageLinks.thumbnail}
                                     link={book.volumeInfo.infoLink}
                                     pages={book.volumeInfo.pageCount}
-                                    Button={() => (
-                                        <button
-                                            onClick={() => this.saveAndModal(book.id, book.volumeInfo.title, book.volumeInfo.imageLinks.thumbnail)}
-                                            className="btn search-btn">
-                                            Add to bookshelf
-                                        </button>
-                                    )}
+                                    ISBN={book.volumeInfo.industryIdentifiers[0].identifier}
+                                    Button={<SaveBtn
+                                        key={book.id}
+                                        addToBookshelf={this.addToBookshelf(book.id)}
+                                    />}
                                 />
                             ))}
                         </List>
                     </Col>
                     <Col size="md-3" />
                 </Row>
-                {/* modal content here */}
+                {/* Checkout modal */}
                 <Modal show={this.state.show} onHide={this.closeModal} className="modal-card" variant="info">
                     <Modal.Header closeButton>
                         <Modal.Title>Library Card</Modal.Title>
@@ -174,6 +204,7 @@ class Search extends Component {
                         </button>
                     </Modal.Footer>
                 </Modal>
+                {/* Review modal */}
             </Container>
         );
     }
