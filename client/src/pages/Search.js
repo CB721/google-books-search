@@ -181,7 +181,11 @@ class Search extends Component {
                                     ISBN={book.volumeInfo.industryIdentifiers[0].identifier}
                                     Button={<SaveBtn
                                         key={book.id}
-                                        addToBookshelf={this.addToBookshelf(book.id)}
+                                        saveAndModal={this.saveAndModal(
+                                            book.id,
+                                            book.volumeInfo.title,
+                                            book.volumeInfo.imageLinks.thumbnail,
+                                            book.volumeInfo.industryIdentifiers[0].identifier)}
                                     />}
                                 />
                             ))}

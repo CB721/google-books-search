@@ -3,7 +3,7 @@ import "./style.css";
 
 function SaveBtn(props) {
   return (
-    <button onClick={props.addToBookshelf} className="save-btn">
+    <button onClick={props.saveAndModal} className="save-btn">
       Add to Bookshelf
         </button>
   );
