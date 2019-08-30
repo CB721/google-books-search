@@ -12,6 +12,10 @@
 .head-space {
   margin-top: 200px;
 }
+.foot-space {
+  height: 100px;
+  margin-bottom: 200px;
+}
 .modal-card {
   max-width: 100%;
 }

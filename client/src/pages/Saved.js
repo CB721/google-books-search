@@ -36,7 +36,6 @@ class Search extends Component {
         event.preventDefault();
         this.deleteBook(id);
         this.setState({ modalBookTitle: title })
-        this.getGiphy();
         this.showModal();
     }
     deleteBook = (id) => {
@@ -46,13 +45,9 @@ class Search extends Component {
             .catch(err => console.log("Delete error: " + err));
         // get the updated books
         this.checkBookshelf();
+        this.setState(this.state);
     }
-    getGiphy = () => {
-        API.giphy()
-            .then(res => this.setState({ giphyGif: res.data }))
-            .catch(err => console.log(err))
-            .finally(console.log("here is the giphy response: " + this.state.giphyGif))
-    };
+    
     showModal = () => {
         this.setState({ show: true });
     };
@@ -107,13 +102,16 @@ class Search extends Component {
                         </Col>
                         <Col size="md-3" />
                     </Row>
+                    <Row>
+                    <div className="foot-space"></div>
+                    </Row>
                     <Modal show={this.state.show} onHide={this.closeModal} className="modal-card" variant="info">
                         <Modal.Header closeButton>
                             <Modal.Title>Library Card</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             You have removed {this.state.modalBookTitle} from your bookshelf.
-                    <img src={this.state.giphyGif} alt="fahrenheit 451 gif" className="modal-img" />
+                    <img src="https://media.giphy.com/media/CpE4gXoXpTdII/giphy.gif" alt="fahrenheit 451 gif" className="modal-img" />
                         </Modal.Body>
                         <Modal.Footer>
                             <button className="btn search-btn" onClick={this.closeModal}>

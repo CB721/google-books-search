@@ -187,9 +187,12 @@ class Search extends Component {
                                     />
                                 ))}
                             </List>
-                        ) : (<Spinner animation="border" size="lg" id="spinner"/>)}
+                        ) : (<Spinner animation="border" size="lg" id="spinner" />)}
                     </Col>
                     <Col size="md-3" />
+                </Row>
+                <Row>
+                    <div className="foot-space"></div>
                 </Row>
                 {/* Checkout modal */}
                 <Modal show={this.state.show} onHide={this.closeModal} className="modal-card" variant="info">

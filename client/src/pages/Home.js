@@ -25,19 +25,22 @@ class Home extends Component {
         </video>
         <Row>
           <Col size="md-12">
-          <div className="head-space" />
-              <h1 className="google-books-h1">Google Books Search</h1>
+            <div className="head-space" />
+            <h1 className="google-books-h1">Google Books Search</h1>
           </Col>
         </Row>
         <Row>
-          <Col size="md-3"/>
+          <Col size="md-3" />
           <Col size="md-3">
-            <Card cardTitle="Find a book" cardImage="https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" cardDescription="Search to find a book." cardLink="/search" cardButton="Search"/>
+            <Card cardTitle="Find a book" cardImage="https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" cardDescription="Search to find a book." cardLink="/search" cardButton="Search" />
           </Col>
           <Col size="md-3">
-          <Card cardTitle="Your bookshelf" cardImage="https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2653&q=80" cardDescription="Check out your saved books." cardLink="/saved" cardButton="Bookshelf"/>
+            <Card cardTitle="Your bookshelf" cardImage="https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2653&q=80" cardDescription="Check out your saved books." cardLink="/saved" cardButton="Bookshelf" />
           </Col>
-          <Col size="md-3"/>
+          <Col size="md-3" />
+        </Row>
+        <Row>
+          <div className="foot-space"></div>
         </Row>
       </Container>
     );
