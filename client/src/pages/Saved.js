@@ -35,13 +35,15 @@ class Search extends Component {
             .catch(err => console.log("Get request error: " + err))
             .finally(console.log("here are the saved books: \n '" + this.state.books + " '"));
     }
-    deleteSequence = (id, title) => {
+    deleteSequence = (id, title) => (event) => {
+        event.preventDefault();
         this.deleteBook(id);
         this.setState({ modalBookTitle: title })
         this.getGiphy();
         this.showModal();
     }
     deleteBook = (id) => {
+        console.log(id);
         API.deleteBook(id)
             .then(res =>
                 this.setState({ books: res.data }, () => {
@@ -58,7 +60,6 @@ class Search extends Component {
     };
     showModal = () => {
         this.setState({ show: true });
-        this.checkBookState();
     };
     closeModal = () => {
         this.setState({ show: false });
@@ -98,7 +99,11 @@ class Search extends Component {
                                                 pages={book.pages}
                                                 Button={<DeleteButton
                                                     key={book.id}
-                                                    deleteBook={this.deleteBook(book.id)}
+                                                    deleteBook={this.deleteSequence(
+                                                        book.id,
+                                                        book.title
+                                                    )
+                                                    }
                                                 />}
                                             />
                                         </div>

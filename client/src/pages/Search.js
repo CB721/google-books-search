@@ -72,33 +72,24 @@ class Search extends Component {
         if (requestURL.length > 8) {
             datamuse.request(requestURL)
                 .then((res) => {
-                    let placeholder = [];
-                    let firstSuggestion = res[0].word.charAt(0).toUpperCase() + res[0].word.slice(1);
-                    let secondSuggestion = res[1].word.charAt(0).toUpperCase() + res[1].word.slice(1);
-                    let thirduggestion = res[2].word.charAt(0).toUpperCase() + res[2].word.slice(1);
-                    placeholder.push(firstSuggestion);
-                    placeholder.push(secondSuggestion);
-                    placeholder.push(thirduggestion);
-                    this.setState({
-                        placeHolder: placeholder.join(", "),
-                        showPara: ""
-                    })
+                    // api usually returns no results if the string is longer than 10 characters
+                    if (requestURL.length > 16) {
+                        this.setState({ placeHolder: "That is a long book!" })
+                        // if less than 3 letters in search
+                    } else if (requestURL.length < 10) {
+                        this.setState({ placeHolder: "Find a book", showPara: "hide-para" })
+                    } else {
+                        // second result is usually more reliable
+                        let suggestion = res[1].word.charAt(0).toUpperCase() + res[1].word.slice(1);
+                        this.setState({
+                            placeHolder: "Looking for " + suggestion + "?",
+                            showPara: ""
+                        })
+                    }
+
                 });
         }
-        if (requestURL.length < 10) {
-            this.setState({ placeHolder: "Find a book", showPara: "hide-para" })
-        }
-        if (requestURL.length > 37) {
-            this.setState({ placeHolder: "That is a long book!" })
-        }
     };
-    onSelect = (selectedItem) => {
-        this.doSomething(selectedItem);
-    };
-
-    doSomething = (selectedItem) => {
-        this.setState({ search: selectedItem })
-    }
 
     handleFormSubmit = event => {
         event.preventDefault();
@@ -129,7 +120,8 @@ class Search extends Component {
     closeModal = () => {
         this.setState({ show: false });
     }
-    saveAndModal = (id, title, cover, ISBN) => {
+    saveAndModal = (id, title, cover, ISBN) =>  (event) => {
+        event.preventDefault();
         console.log(ISBN);
         this.addToBookshelf(id);
         this.showModal(title, cover);
@@ -155,7 +147,7 @@ class Search extends Component {
                     </Col>
                     <Col size="md-3" />
                     <Col size="md-6">
-                        <h4 className={this.state.showPara}>Looking for {this.state.placeHolder}?</h4>
+                        <h4 className={this.state.showPara}>{this.state.placeHolder}</h4>
                         <SearchForm
                             value={this.state.search}
                             handleInputChange={this.handleInputChange}

@@ -1,5 +1,5 @@
 import React from "react";
-import DataListInput from 'react-datalist-input';
+// import DataListInput from 'react-datalist-input';
 // import Dropdown from 'react-bootstrap/Dropdown';
 
 function SearchForm(props) {
@@ -17,12 +17,12 @@ function SearchForm(props) {
           autoComplete="off"
         />
         <div>
-          <DataListInput
+          {/* <DataListInput
             className=""
             placeholder={props.placeHolder}
             items={props.placeHolder}
             onSelect={props.onSelect}
-          />
+          /> */}
         </div>
         <br />
         <button onClick={props.handleFormSubmit} className="btn search-btn">
