@@ -111,6 +111,7 @@ h4 {
 }
 .search-btn:hover {
   background: #2f69c6;
+  color: white;
   animation-iteration-count: 1s;
   -webkit-transform: scale(1.05);
   -ms-transform: scale(1.05);
@@ -122,3 +123,7 @@ h4 {
   transition: .1s;
 }
 
+#spinner {
+  margin-left: 50%;
+  color: #2f69c6;
+}

@@ -75,7 +75,8 @@ class Search extends Component {
                         src={videoBG}>
                     </video>
                     <Row>
-                        <Col size="md-12">
+                        <Col size="md-3" />
+                        <Col size="md-6">
                             <div className="head-space" />
                             <h1 className="google-books-h1">Google Books Search</h1>
                             {this.state.books.length > 0 ? (
@@ -85,7 +86,7 @@ class Search extends Component {
                                             <Book
                                                 key={book._id}
                                                 title={book.title}
-                                                author={book.authors}
+                                                author={book.author}
                                                 description={book.description}
                                                 cover={book.cover}
                                                 link={book.link}
@@ -104,6 +105,7 @@ class Search extends Component {
                                 </List>
                             ) : (<h2 className="google-books-h1">Your bookshelf is empty</h2>)}
                         </Col>
+                        <Col size="md-3" />
                     </Row>
                     <Modal show={this.state.show} onHide={this.closeModal} className="modal-card" variant="info">
                         <Modal.Header closeButton>

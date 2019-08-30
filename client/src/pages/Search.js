@@ -8,6 +8,7 @@ import Book from "../components/Book";
 import Modal from 'react-bootstrap/Modal';
 import SaveBtn from "../components/Save-Button";
 import videoBG from "./assets/book-footage.mp4";
+import Spinner from 'react-bootstrap/Spinner'
 import "./assets/style.css";
 
 class Search extends Component {
@@ -22,9 +23,11 @@ class Search extends Component {
         modalBookImg: "",
         placeHolder: "",
         showPara: "hide-para",
+        uploading: false,
     };
 
     searchBooks = query => {
+        this.setState({ uploading: true })
         API.googleBook(query)
             .then(res => {
                 let results = res.data.items
@@ -46,7 +49,8 @@ class Search extends Component {
                     books: results,
                     errorStyles: "",
                     searchMessage: "",
-                    showPara: "hide-para"
+                    showPara: "hide-para",
+                    uploading: false,
                 });
             })
             .catch(() => this.setState({
@@ -72,8 +76,8 @@ class Search extends Component {
         if (requestURL.length > 8) {
             datamuse.request(requestURL)
                 .then((res) => {
-                    // api usually returns no results if the string is longer than 10 characters
-                    if (requestURL.length > 16) {
+                    // api usually returns no results if the string is longer than 14 characters
+                    if (requestURL.length > 20) {
                         this.setState({ placeHolder: "That is a long book!" })
                         // if less than 3 letters in search
                     } else if (requestURL.length < 10) {
@@ -159,29 +163,31 @@ class Search extends Component {
                 <Row>
                     <Col size="md-3" />
                     <Col size="md-6">
-                        <List>
-                            {this.state.books.map(book => (
-                                <Book
-                                    key={book.id}
-                                    _id={book.id}
-                                    title={book.volumeInfo.title}
-                                    author={book.volumeInfo.authors}
-                                    description={book.volumeInfo.description}
-                                    cover={book.volumeInfo.imageLinks.thumbnail}
-                                    link={book.volumeInfo.infoLink}
-                                    pages={book.volumeInfo.pageCount}
-                                    ISBN={book.volumeInfo.industryIdentifiers[0].identifier}
-                                    Button={<SaveBtn
+                        {this.state.uploading === false ? (
+                            <List>
+                                {this.state.books.map(book => (
+                                    <Book
                                         key={book.id}
-                                        saveAndModal={this.saveAndModal(
-                                            book.id,
-                                            book.volumeInfo.title,
-                                            book.volumeInfo.imageLinks.thumbnail,
-                                            book.volumeInfo.industryIdentifiers[0].identifier)}
-                                    />}
-                                />
-                            ))}
-                        </List>
+                                        _id={book.id}
+                                        title={book.volumeInfo.title}
+                                        author={book.volumeInfo.authors}
+                                        description={book.volumeInfo.description}
+                                        cover={book.volumeInfo.imageLinks.thumbnail}
+                                        link={book.volumeInfo.infoLink}
+                                        pages={book.volumeInfo.pageCount}
+                                        ISBN={book.volumeInfo.industryIdentifiers[0].identifier}
+                                        Button={<SaveBtn
+                                            key={book.id}
+                                            saveAndModal={this.saveAndModal(
+                                                book.id,
+                                                book.volumeInfo.title,
+                                                book.volumeInfo.imageLinks.thumbnail,
+                                                book.volumeInfo.industryIdentifiers[0].identifier)}
+                                        />}
+                                    />
+                                ))}
+                            </List>
+                        ) : (<Spinner animation="border" size="lg" id="spinner"/>)}
                     </Col>
                     <Col size="md-3" />
                 </Row>
