@@ -16,7 +16,7 @@
     overflow: auto;
     text-align: right;
     padding: 10px;
-    /* margin-bottom: 0px; */
+
     bottom: 0;
 }
 @media only screen and (max-width: 600px) {

@@ -3,7 +3,8 @@
     border: none;
     color: white; 
     border-radius: 10px;
-    height: 40px;
+    max-width: 100px;
+    padding: 10px;
 }
 .delete-btn:hover {
     background: #bf0c0c;

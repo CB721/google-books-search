@@ -107,6 +107,7 @@ h4 {
   background: #4286f4;
   border: none;
   color: white; 
+  margin: 10px;
 }
 .search-btn:hover {
   background: #2f69c6;

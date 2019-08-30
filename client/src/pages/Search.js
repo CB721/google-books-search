@@ -79,7 +79,7 @@ class Search extends Component {
                     } else if (requestURL.length < 10) {
                         this.setState({ placeHolder: "Find a book", showPara: "hide-para" })
                     } else {
-                        // second result is usually more reliable
+                        // second result is usually more accurate
                         let suggestion = res[1].word.charAt(0).toUpperCase() + res[1].word.slice(1);
                         this.setState({
                             placeHolder: "Looking for " + suggestion + "?",
@@ -120,7 +120,7 @@ class Search extends Component {
     closeModal = () => {
         this.setState({ show: false });
     }
-    saveAndModal = (id, title, cover, ISBN) =>  (event) => {
+    saveAndModal = (id, title, cover, ISBN) => (event) => {
         event.preventDefault();
         console.log(ISBN);
         this.addToBookshelf(id);

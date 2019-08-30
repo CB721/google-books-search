@@ -28,12 +28,9 @@ class Search extends Component {
     checkBookshelf = () => {
         API.getBooks()
             .then(res =>
-                this.setState({ books: res.data }, () => {
-                    console.log(this.state.books);
-                })
+                this.setState({ books: res.data })
             )
             .catch(err => console.log("Get request error: " + err))
-            .finally(console.log("here are the saved books: \n '" + this.state.books + " '"));
     }
     deleteSequence = (id, title) => (event) => {
         event.preventDefault();
@@ -43,20 +40,18 @@ class Search extends Component {
         this.showModal();
     }
     deleteBook = (id) => {
-        console.log(id);
+        // delete book
         API.deleteBook(id)
-            .then(res =>
-                this.setState({ books: res.data }, () => {
-                    console.log("Updated books after one is deleted: " + this.state.books);
-                })
-            )
-            .catch(err => console.log("Delete error: " + err))
-            .finally(console.log("here are the updated saved books: " + this.state.books));
+            .then()
+            .catch(err => console.log("Delete error: " + err));
+        // get the updated books
+        this.checkBookshelf();
     }
     getGiphy = () => {
         API.giphy()
             .then(res => this.setState({ giphyGif: res.data }))
-            .catch(err => console.log(err));
+            .catch(err => console.log(err))
+            .finally(console.log("here is the giphy response: " + this.state.giphyGif))
     };
     showModal = () => {
         this.setState({ show: true });
@@ -83,14 +78,12 @@ class Search extends Component {
                         <Col size="md-12">
                             <div className="head-space" />
                             <h1 className="google-books-h1">Google Books Search</h1>
-                            {console.log("Inside Saved.render()")}
-                            {console.log(this.state.books)}
                             {this.state.books.length > 0 ? (
                                 <List>
                                     {this.state.books.map(book => (
                                         <div>
                                             <Book
-                                                key={book.id}
+                                                key={book._id}
                                                 title={book.title}
                                                 author={book.authors}
                                                 description={book.description}
@@ -100,7 +93,7 @@ class Search extends Component {
                                                 Button={<DeleteButton
                                                     key={book.id}
                                                     deleteBook={this.deleteSequence(
-                                                        book.id,
+                                                        book._id,
                                                         book.title
                                                     )
                                                     }

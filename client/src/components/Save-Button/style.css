@@ -3,8 +3,8 @@
     border: none;
     color: white; 
     border-radius: 10px;
-    height: 40px;
-    padding-right: 3px;
+    max-width: 100px;
+    padding: 10px;
 }
 .save-btn:hover {
     background: rgb(6, 89, 70);
