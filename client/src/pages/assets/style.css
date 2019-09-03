@@ -25,7 +25,6 @@
 }
 input::placeholder {
   opacity: 1;
-  /* text-indent: 85%; */
 }
 .hide-dropdown {
   opacity: -1;
@@ -126,7 +125,6 @@ h4 {
   -o-transition: .1s;
   transition: .1s;
 }
-
 #spinner {
   margin-left: 50%;
   color: #2f69c6;

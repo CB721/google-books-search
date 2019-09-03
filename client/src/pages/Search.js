@@ -59,7 +59,6 @@ class Search extends Component {
             })
             );
     };
-
     handleInputChange = event => {
         const value = event.target.value;
         const name = event.target.name;
@@ -70,7 +69,7 @@ class Search extends Component {
         let requestValue = valueArr.join("");
         this.wordSuggestion(requestValue)
     };
-
+    // word suggestion from datamuse api
     wordSuggestion = (request) => {
         let requestURL = "/sug?s=" + request;
         if (requestURL.length > 8) {
@@ -94,14 +93,13 @@ class Search extends Component {
                 });
         }
     };
-
     handleFormSubmit = event => {
         event.preventDefault();
         this.searchBooks(this.state.search);
         this.setState({ showPara: "hide-para" });
     };
-
     addToBookshelf = id => {
+        // find the id of a book in the state that matches the id that was clicked on
         const book = this.state.books.find(book => book.id === id);
         API.saveBook({
             _id: book.id,
@@ -123,7 +121,7 @@ class Search extends Component {
     };
     closeModal = () => {
         this.setState({ show: false });
-    }
+    };
     saveAndModal = (id, title, cover, ISBN) => (event) => {
         event.preventDefault();
         console.log(ISBN);
@@ -170,7 +168,7 @@ class Search extends Component {
                                         key={book.id}
                                         _id={book.id}
                                         title={book.volumeInfo.title}
-                                        author={book.volumeInfo.authors}
+                                        author={book.volumeInfo.authors.join(", ")}
                                         description={book.volumeInfo.description}
                                         cover={book.volumeInfo.imageLinks.thumbnail}
                                         link={book.volumeInfo.infoLink}
@@ -182,7 +180,12 @@ class Search extends Component {
                                                 book.id,
                                                 book.volumeInfo.title,
                                                 book.volumeInfo.imageLinks.thumbnail,
-                                                book.volumeInfo.industryIdentifiers[0].identifier)}
+                                                book.volumeInfo.industryIdentifiers[0].identifier,
+                                                book.volumeInfo.authors,
+                                                book.volumeInfo.description,
+                                                book.volumeInfo.infoLink,
+                                                book.volumeInfo.pageCount
+                                            )}
                                         />}
                                     />
                                 ))}

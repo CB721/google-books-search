@@ -81,7 +81,7 @@ class Search extends Component {
                                             <Book
                                                 key={book._id}
                                                 title={book.title}
-                                                author={book.author}
+                                                author={book.author.join(", ")}
                                                 description={book.description}
                                                 cover={book.cover}
                                                 link={book.link}
@@ -91,8 +91,7 @@ class Search extends Component {
                                                     deleteBook={this.deleteSequence(
                                                         book._id,
                                                         book.title
-                                                    )
-                                                    }
+                                                    )}
                                                 />}
                                             />
                                         </div>
