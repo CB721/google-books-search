@@ -102,7 +102,7 @@ class Search extends Component {
         // find the id of a book in the state that matches the id that was clicked on
         const book = this.state.books.find(book => book.id === id);
         API.saveBook({
-            _id: book.id,
+            googleID: book.id,
             title: book.volumeInfo.title,
             author: book.volumeInfo.authors,
             description: book.volumeInfo.description,
@@ -168,7 +168,7 @@ class Search extends Component {
                                         key={book.id}
                                         _id={book.id}
                                         title={book.volumeInfo.title}
-                                        author={book.volumeInfo.authors.join(", ")}
+                                        author={book.volumeInfo.authors}
                                         description={book.volumeInfo.description}
                                         cover={book.volumeInfo.imageLinks.thumbnail}
                                         link={book.volumeInfo.infoLink}
@@ -180,11 +180,7 @@ class Search extends Component {
                                                 book.id,
                                                 book.volumeInfo.title,
                                                 book.volumeInfo.imageLinks.thumbnail,
-                                                book.volumeInfo.industryIdentifiers[0].identifier,
-                                                book.volumeInfo.authors,
-                                                book.volumeInfo.description,
-                                                book.volumeInfo.infoLink,
-                                                book.volumeInfo.pageCount
+                                                book.volumeInfo.industryIdentifiers[0].identifier
                                             )}
                                         />}
                                     />

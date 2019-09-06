@@ -12,7 +12,7 @@ module.exports = {
       .catch(err => console.log(err));
   },
   create: function (req, res) {
-    db.create(req.query)
+    db.create(req.body)
       .then(dbBook => res.json(dbBook))
       .catch(err => console.log(err));
   },

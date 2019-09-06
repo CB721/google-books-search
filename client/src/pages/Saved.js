@@ -77,9 +77,8 @@ class Search extends Component {
                             {this.state.books.length > 0 ? (
                                 <List>
                                     {this.state.books.map(book => (
-                                        <div>
+                                        <div key={book.googleID}>
                                             <Book
-                                                key={book._id}
                                                 title={book.title}
                                                 author={book.author.join(", ")}
                                                 description={book.description}
