@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Card from "../components/Card";
+import Carousel from "../components/Carousel";
 import videoBG from "./assets/book-footage.mp4"
 import "./assets/style.css";
 
@@ -15,7 +16,7 @@ class Home extends Component {
   render() {
     return (
       <Container fluid>
-        <video className="video-background" loop autoPlay playsInline
+        <video className="video-background" loop autoPlay playsInline muted
           style={{
             objectFit: 'cover',
             width: '100%',
@@ -28,6 +29,15 @@ class Home extends Component {
             <div className="head-space" />
             <h1 className="google-books-h1">Google Books Search</h1>
           </Col>
+        </Row>
+        <Row>
+          <Col size="md-3" />
+          <Col size="md-6">
+            <Carousel
+
+            />
+          </Col>
+          <Col size="md-3" />
         </Row>
         <Row>
           <Col size="md-3" />

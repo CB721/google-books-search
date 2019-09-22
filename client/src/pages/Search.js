@@ -133,7 +133,7 @@ class Search extends Component {
     render() {
         return (
             <Container fluid>
-                <video className="video-background" loop autoPlay playsInline
+                <video className="video-background" loop autoPlay muted playsInline
                     style={{
                         objectFit: 'cover',
                         width: '100%',
