@@ -3,4 +3,27 @@
     margin: 20px;
     opacity: 1;
     border: 1px solid #4286f4;
+    background: rgb(0, 0, 0) transparent;
+    background: rgba(0, 0, 0, 0.6);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+    max-width: 100%;
+}
+img {
+    height: auto;
+    object-fit: cover;
+}
+#carousel-images {
+    max-height: 75%;
+    max-width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+.best-description {
+    white-space: nowrap; 
+    overflow: auto;
+    text-overflow: ellipsis;
+    mix-blend-mode: difference;
 }

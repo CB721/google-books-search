@@ -19,7 +19,6 @@ class Home extends Component {
     carouselBooks: [],
   }
   UNSAFE_componentWillMount() {
-    // get nytimes top Books 
     API.getTopBooks()
       .then(res => {
         let results = res.data.results.books;
@@ -58,16 +57,6 @@ class Home extends Component {
   getGoogleBook = (nyBook) => {
     API.singleGoogleBook(nyBook)
       .then(res => {
-        // let book = res.data.items[0];
-        // this.setState({
-        //   carouselBooks: this.state.carouselBooks.concat(book)
-        // })
-        // this.setState({
-        //   carouselBooks: [
-        //     ...this.state.carouselBooks,
-        //     res.data.items[0]
-        //   ]
-        // })
         this.setState(state => {
           let book = res.data.items[0];
           const carouselBooks = state.carouselBooks.concat(book);
@@ -77,10 +66,6 @@ class Home extends Component {
         })
       })
       .catch((err) => console.log(err));
-  }
-
-  checkState = () => {
-    console.log(this.state.carouselBooks);
   }
 
   render() {
@@ -97,7 +82,6 @@ class Home extends Component {
         <Row>
           <Col size="md-12">
             <div className="head-space" />
-            <button onClick={this.checkState}>Check state</button>
             <h1 className="google-books-h1">Google Books Search</h1>
           </Col>
         </Row>
