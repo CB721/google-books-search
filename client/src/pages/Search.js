@@ -30,7 +30,7 @@ class Search extends Component {
         this.setState({ uploading: true })
         API.googleBook(query)
             .then(res => {
-                let results = res.data.items
+                let results = res.data.items;
                 results.map(result => {
                     result = {
                         key: result.id,
@@ -44,7 +44,7 @@ class Search extends Component {
                         ISBN: result.volumeInfo.industryIdentifiers[0].identifier
                     }
                     return results;
-                })
+                });
                 this.setState({
                     books: results,
                     errorStyles: "",
