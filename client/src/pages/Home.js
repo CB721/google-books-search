@@ -5,6 +5,7 @@ import Carousel from "../components/Carousel";
 import videoBG from "./assets/book-footage.mp4";
 import Spinner from 'react-bootstrap/Spinner';
 import API from '../utilities/api';
+import moment from "moment";
 
 import "./assets/style.css";
 
@@ -17,8 +18,31 @@ class Home extends Component {
     cardImage: "",
     nyTimesBooks: [],
     carouselBooks: [],
+    lastUpdate: "",
   }
   UNSAFE_componentWillMount() {
+    API.getSavedTopBooks()
+      .then(res => {
+        let originalTime = res.data[0].lastUpdated;
+        let spliceTime = originalTime.slice(0, 10);
+        let books = res.data[0].books;
+        this.setState({ carouselBooks: books, lastUpdate: spliceTime });
+      })
+    setTimeout(
+      function () {
+        if (this.state.carouselBooks.length > 14 && this.state.lastUpdate) {
+          this.checkLastUpdate();
+        }
+      }.bind(this), 500
+    )
+  }
+  checkLastUpdate = () => {
+    const timeDifference = moment().diff(moment(this.state.lastUpdate), 'days');
+    if (timeDifference > 0) {
+      this.getNYBooks();
+    }
+  }
+  getNYBooks = () => {
     API.getTopBooks()
       .then(res => {
         let results = res.data.results.books;
@@ -34,7 +58,7 @@ class Home extends Component {
         });
       })
       .catch((err) => console.log(err));
-    if (this.state.nyTimesBooks.length > 9) {
+    if (this.state.nyTimesBooks.length > 14) {
       this.getTopBooks();
     } else {
       setTimeout(
@@ -66,6 +90,13 @@ class Home extends Component {
         })
       })
       .catch((err) => console.log(err));
+    if (this.state.carouselBooks.length > 14) {
+      this.saveTopBooks(this.state.carouselBooks);
+    }
+  }
+  saveTopBooks = (books) => {
+    API.saveTopBooks(books)
+      .then(() => console.log("Top books saved"))
   }
 
   render() {
@@ -81,6 +112,7 @@ class Home extends Component {
         </video>
         <Row>
           <Col size="md-12">
+
             <div className="head-space" />
             <h1 className="google-books-h1">Google Books Search</h1>
           </Col>

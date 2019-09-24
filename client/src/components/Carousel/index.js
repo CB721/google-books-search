@@ -3,7 +3,6 @@ import Carousel from 'react-bootstrap/Carousel';
 import "./style.css";
 
 function TopTenCarousel(props) {
-    console.log(props)
     return (
         <Carousel className="top-books-carousel">
             {props.books.map(book => (
@@ -18,13 +17,21 @@ function TopTenCarousel(props) {
                         style={{ height: "300px" }}
                     />
                     <Carousel.Caption>
-                        <h3>{book.volumeInfo.title}</h3>
-                        <h5>{book.volumeInfo.authors}</h5>
-                        <p
-                            className="best-description"
+                        <h3
+                            className="carousel-text"
+                        >
+                            {book.volumeInfo.title}
+                        </h3>
+                        <h5
+                            className="carousel-text"
+                        >
+                            {book.volumeInfo.authors}
+                        </h5>
+                        {/* <p
+                            className="carousel-text"
                         >
                             {book.volumeInfo.description}
-                        </p>
+                        </p> */}
                     </Carousel.Caption>
                 </Carousel.Item>
             ))}

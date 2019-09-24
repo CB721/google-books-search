@@ -30,5 +30,11 @@ export default {
   // Get top books
   getTopBooks: function () {
     return axios.get(nyURL + nyKey);
+  },
+  getSavedTopBooks: function() {
+    return axios.get("/api/tops")
+  },
+  saveTopBooks: function(nyBooks) {
+    return axios.post("/api/tops/" + nyBooks);
   }
 };

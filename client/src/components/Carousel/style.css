@@ -21,9 +21,12 @@ img {
     margin-right: auto;
     width: 50%;
 }
-.best-description {
+.carousel-text {
+    background: rgba(2, 2, 2, 0.8);
+    border-radius: 10px;
     white-space: nowrap; 
     overflow: auto;
     text-overflow: ellipsis;
     mix-blend-mode: difference;
+    padding: 5px;
 }
