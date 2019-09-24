@@ -1,9 +1,10 @@
 ## Google Books Search
-* Google Book Search is a search application using React.js.  When the user first views the project, they are presented with two options.  They can search for a book, or they can view the books saved to the bookshelf.
+* Google Book Search is a search application using React.js.  When the user first views the page, they are presented with two options.  They can search for a book, or they can view the books saved to the bookshelf.
+* The user is also presented with a carousel of the current New York Times best sellers list.
 
 [View Project](https://google-books-search-cb.herokuapp.com)
 
-* When they search, a word suggestion appears above the search bar.  Once they hit 'search', ten books are displayed with the following:
+* When the users begins to search, a word suggestion appears above the search bar.  Once they hit 'search', ten books are displayed with the following:
 
 * Title
 * Author
@@ -35,3 +36,4 @@
 4) Node.js
 5) Google Books API
 6) Datamuse API 
+7) NYTimes Books API

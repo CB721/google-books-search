@@ -118,8 +118,9 @@ class Home extends Component {
           </Col>
         </Row>
         <Row>
-          <Col size="md-3" />
-          <Col size="md-6">
+          <Col size="md-2" />
+          <Col size="md-8">
+          <h6 className="google-books-h1">Current New York Times Bestsellers</h6>
             {this.state.carouselBooks.length > 14 ? (
               <Carousel
                 books={this.state.carouselBooks}
@@ -129,7 +130,7 @@ class Home extends Component {
               )}
 
           </Col>
-          <Col size="md-3" />
+          <Col size="md-2" />
         </Row>
         <Row>
           <Col size="md-3" />

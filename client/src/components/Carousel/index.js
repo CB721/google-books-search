@@ -16,7 +16,7 @@ function TopTenCarousel(props) {
                         alt={book.volumeInfo.title}
                         style={{ height: "300px" }}
                     />
-                    <Carousel.Caption>
+                    <Carousel.Caption className="carousel-text-section">
                         <h3
                             className="carousel-text"
                         >
@@ -27,11 +27,11 @@ function TopTenCarousel(props) {
                         >
                             {book.volumeInfo.authors}
                         </h5>
-                        {/* <p
+                        <p
                             className="carousel-text"
                         >
                             {book.volumeInfo.description}
-                        </p> */}
+                        </p>
                     </Carousel.Caption>
                 </Carousel.Item>
             ))}
