@@ -3,6 +3,7 @@
 * The user is also presented with a carousel of the current New York Times best sellers list.
 
 [View Project](https://google-books-search-cb.herokuapp.com)
+![app-walkthrough](Walkthrough/google-books3.gif)
 
 * When the users begins to search, a word suggestion appears above the search bar.  Once they hit 'search', ten books are displayed with the following:
 
