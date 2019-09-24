@@ -26,9 +26,8 @@
 2) I want to be able to save books to view later.
 
 ## Future Improvements
-1) Implement NYTimes api for current top-selling books
-2) Give user ability to create and save books to their own account
-3) Create animated character with speech bubble containing word suggestion
+1) Give user ability to create and save books to their own account
+2) Create animated character with speech bubble containing word suggestion
 
 ## Technologies Used
 1) HTML/CSS
