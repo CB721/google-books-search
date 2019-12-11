@@ -10,7 +10,7 @@ function TopTenCarousel(props) {
                     key={book.id}
                 >
                     <img
-                        className="d-block w-100"
+                        className="d-block w-50 mr-auto ml-auto"
                         id="carousel-images"
                         src={book.volumeInfo.imageLinks.thumbnail}
                         alt={book.volumeInfo.title}
