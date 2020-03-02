@@ -1,4 +1,4 @@
-## Google Books Search
+# Google Books Search
 * Google Book Search is a search application using React.js.  When the user first views the page, they are presented with two options.  They can search for a book, or they can view the books saved to the bookshelf.
 * The user is also presented with a carousel of the current New York Times best sellers list.
 

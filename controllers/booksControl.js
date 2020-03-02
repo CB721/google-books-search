@@ -1,4 +1,5 @@
 const db = require("../models/Book");
+const axios = require("axios");
 
 module.exports = {
   findAll: function (req, res) {
@@ -26,5 +27,38 @@ module.exports = {
       .then(dbBook => dbBook.remove())
       .then(dbBook => res.json(dbBook))
       .catch(err => console.log(err));
+  },
+  searchAll: function (req, res) {
+    const book = req.params.book;
+    const URL = "https://www.googleapis.com/books/v1/volumes?maxResults=10&orderBy=relevance&q=";
+    axios.get(URL + book)
+      .then(response => {
+        return res.status(200).json(response.data);
+      })
+      .catch(err => {
+        return res.status(500).send(err);
+      });
+  },
+  searchOne: function (req, res) {
+    const book = req.params.book;
+    const URL = "https://www.googleapis.com/books/v1/volumes?maxResults=1&orderBy=relevance&q=";
+    axios.get(URL + book)
+      .then(response => {
+        return res.status(200).json(response.data);
+      })
+      .catch(err => {
+        return res.status(500).send(err);
+      });
+  },
+  getTopBooks: function (req, res) {
+    const nyURL = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?num_results=5&api-key=";
+    const nyKey = process.env.NY_TIMES;
+    axios.get(nyURL + nyKey)
+      .then(response => {
+        return res.status(200).json(response.data);
+      })
+      .catch(err => {
+        return res.status(500).send(err);
+      });
   }
 };

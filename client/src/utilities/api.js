@@ -1,10 +1,4 @@
 import axios from "axios";
-require('dotenv').config();
-const URL = "https://www.googleapis.com/books/v1/volumes?maxResults=10&orderBy=relevance&q=";
-const singleBookURL = "https://www.googleapis.com/books/v1/volumes?maxResults=1&orderBy=relevance&q="
-const nyURL = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?num_results=5&api-key=";
-const nyKey = "2PXJWyqOLiNJo8C537MxtEGoq84R6kpa";
-// const nyKey = process.env.NYTIMES_KEY;
 
 export default {
   // Gets all books
@@ -21,15 +15,15 @@ export default {
   },
   // Book search from Google
   googleBook: function (query) {
-    return axios.get(URL + query);
+    return axios.get(`/api/books/search/all/${query}`);
   },
   // Get top result from google
   singleGoogleBook: function (search) {
-    return axios.get(singleBookURL + search);
+    return axios.get(`'/api/books/search/single/${search}`);
   },
   // Get top books
   getTopBooks: function () {
-    return axios.get(nyURL + nyKey);
+    return axios.get("/api/books/ny/top");
   },
   getSavedTopBooks: function() {
     return axios.get("/api/tops")
