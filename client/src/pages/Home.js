@@ -45,58 +45,31 @@ class Home extends Component {
   getNYBooks = () => {
     API.getTopBooks()
       .then(res => {
-        let results = res.data.results.books;
-        results.map(result => {
-          result = {
-            rank: result.rank,
-            isbn: result.primary_isbn13
-          }
-          return results;
-        });
         this.setState({
-          nyTimesBooks: results,
+          carouselBooks: res.data
         });
+        this.saveTopBooks(res.data);
       })
       .catch((err) => console.log(err));
-    if (this.state.nyTimesBooks.length > 14) {
-      this.getTopBooks();
-    } else {
-      setTimeout(
-        function () {
-          this.getTopBooks();
-        }.bind(this), 1000
-      )
-    };
-  }
-  getTopBooks = () => {
-    const nyBooks = this.state.nyTimesBooks;
-    const googleSearch = this.getGoogleBook
-    if (nyBooks) {
-      nyBooks.forEach(function (nyBook) {
-        const search = nyBook.title + " " + nyBook.author;
-        googleSearch(search);
-      })
-    }
   }
   getGoogleBook = (nyBook) => {
     API.singleGoogleBook(nyBook)
       .then(res => {
-        this.setState(state => {
-          let book = res.data.items[0];
-          const carouselBooks = state.carouselBooks.concat(book);
-          return {
-            carouselBooks
-          };
-        })
+        // console.log(res.data);
+        // this.setState(state => {
+        //   let book = res.data.items[0];
+        //   const carouselBooks = state.carouselBooks.concat(book);
+        //   return {
+        //     carouselBooks
+        //   };
+        // })
       })
       .catch((err) => console.log(err));
-    if (this.state.carouselBooks.length > 14) {
-      this.saveTopBooks(this.state.carouselBooks);
-    }
   }
   saveTopBooks = (books) => {
     API.saveTopBooks(books)
-      .then(() => console.log("Top books saved"))
+      .then()
+      .catch(err => console.log(err));
   }
 
   render() {
@@ -121,7 +94,7 @@ class Home extends Component {
           <Col size="md-2" />
           <Col size="md-8">
           <h6 className="google-books-h1">Current New York Times Bestsellers</h6>
-            {this.state.carouselBooks.length > 14 ? (
+            {this.state.carouselBooks.length > 9 ? (
               <Carousel
                 books={this.state.carouselBooks}
               />
