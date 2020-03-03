@@ -28,7 +28,8 @@ export default {
   getSavedTopBooks: function() {
     return axios.get("/api/tops")
   },
-  saveTopBooks: function(nyBooks) {
-    return axios.post("/api/tops/" + nyBooks);
+  saveTopBooks: function(data) {
+    console.log(data);
+    return axios.put("/api/tops/", data);
   }
 };

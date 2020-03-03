@@ -3,7 +3,8 @@ const controller = require("../../controllers/topBooksControl");
 
 router.route("/")
     .get(controller.findAll)
-    .post(controller.create);
+    .post(controller.create)
+    .put(controller.update);
 
 router.route("/:id")
     .get(controller.findById)

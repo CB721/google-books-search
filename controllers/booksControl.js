@@ -53,7 +53,6 @@ module.exports = {
   getTopBooks: function (req, res) {
     const nyURL = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?num_results=5&api-key=";
     const nyKey = process.env.NY_TIMES;
-    // const outArr = [];
     axios.get(nyURL + nyKey)
       .then(response => {
         nyToGoogle(response.data.results.books, [], 0);

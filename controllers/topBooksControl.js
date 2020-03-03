@@ -17,7 +17,12 @@ module.exports = {
       .catch(err => console.log(err));
   },
   update: function (req, res) {
-    db.findOneAndUpdate({ id: req.params.id }, req.query)
+    const _id = req.body._id;
+    const update = {
+      books: req.body.books,
+      dateAdded: req.body.lastUpdated
+    }
+    db.findOneAndUpdate({ _id }, update)
       .then(dbBook => res.json(dbBook))
       .catch(err => console.log(err));
   },

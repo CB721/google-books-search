@@ -21,6 +21,9 @@ app.use(routes);
 // mongoose connection
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 
+// allows us to use .findOneAndUpdate in controllers
+mongoose.set('useFindAndModify', false);
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });

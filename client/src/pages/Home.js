@@ -5,7 +5,6 @@ import Carousel from "../components/Carousel";
 import videoBG from "./assets/book-footage.mp4";
 import Spinner from 'react-bootstrap/Spinner';
 import API from '../utilities/api';
-import moment from "moment";
 
 import "./assets/style.css";
 
@@ -23,32 +22,31 @@ class Home extends Component {
   UNSAFE_componentWillMount() {
     API.getSavedTopBooks()
       .then(res => {
-        let originalTime = res.data[0].lastUpdated;
-        let spliceTime = originalTime.slice(0, 10);
-        let books = res.data[0].books;
-        this.setState({ carouselBooks: books, lastUpdate: spliceTime });
-      })
-    setTimeout(
-      function () {
-        if (this.state.carouselBooks.length > 14 && this.state.lastUpdate) {
-          this.checkLastUpdate();
+        const updateMonth = parseInt(res.data[0].lastUpdated.split("T")[0].split("-")[1]);
+        const updateDay = parseInt(res.data[0].lastUpdated.split("T")[0].split("-")[2]);
+        const today = new Date();
+        const day = today.getDate();
+        const month = today.getMonth();
+        // if it is a different month
+        if (updateMonth !== month + 1) {
+          this.getNYBooks(res.data[0]._id);
+          // if it is a different day of the same month
+        } else if (updateDay < day) {
+          this.getNYBooks(res.data[0]._id);
+        } else {
+          this.setState({
+            carouselBooks: res.data[0].books
+          });
         }
-      }.bind(this), 500
-    )
+      });
   }
-  checkLastUpdate = () => {
-    const timeDifference = moment().diff(moment(this.state.lastUpdate), 'days');
-    if (timeDifference > 0) {
-      this.getNYBooks();
-    }
-  }
-  getNYBooks = () => {
+  getNYBooks = (id) => {
     API.getTopBooks()
       .then(res => {
         this.setState({
           carouselBooks: res.data
         });
-        this.saveTopBooks(res.data);
+        this.saveTopBooks(res.data, id);
       })
       .catch((err) => console.log(err));
   }
@@ -66,9 +64,14 @@ class Home extends Component {
       })
       .catch((err) => console.log(err));
   }
-  saveTopBooks = (books) => {
-    API.saveTopBooks(books)
-      .then()
+  saveTopBooks = (books, _id) => {
+    const data = {
+      books,
+      _id,
+      lastUpdated: new Date()
+    }
+    API.saveTopBooks(data)
+      .then(res => console.log(res.data))
       .catch(err => console.log(err));
   }
 
@@ -93,7 +96,7 @@ class Home extends Component {
         <Row>
           <Col size="md-2" />
           <Col size="md-8">
-          <h6 className="google-books-h1">Current New York Times Bestsellers</h6>
+            <h6 className="google-books-h1">Current New York Times Bestsellers</h6>
             {this.state.carouselBooks.length > 9 ? (
               <Carousel
                 books={this.state.carouselBooks}
