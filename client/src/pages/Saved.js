@@ -5,7 +5,6 @@ import { List } from "../components/List";
 import Book from "../components/Book";
 import Modal from 'react-bootstrap/Modal';
 import DeleteButton from "../components/Delete-Button";
-import videoBG from "./assets/book-footage.mp4";
 import "./assets/style.css";
 
 class Search extends Component {
@@ -61,14 +60,6 @@ class Search extends Component {
         } else {
             return (
                 <Container fluid>
-                    <video className="video-background" loop autoPlay muted playsInline
-                        style={{
-                            objectFit: 'cover',
-                            width: '100%',
-                            height: '100%',
-                        }}
-                        src={videoBG}>
-                    </video>
                     <Row>
                         <Col size="md-3" />
                         <Col size="md-6">

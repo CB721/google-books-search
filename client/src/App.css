@@ -17,6 +17,17 @@
 .App-intro {
   font-size: large;
 }
+.video-background {
+  background: #000;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

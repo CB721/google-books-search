@@ -29,7 +29,6 @@ export default {
     return axios.get("/api/tops")
   },
   saveTopBooks: function(data) {
-    console.log(data);
     return axios.put("/api/tops/", data);
   }
 };

@@ -7,7 +7,6 @@ import { List } from "../components/List";
 import Book from "../components/Book";
 import Modal from 'react-bootstrap/Modal';
 import SaveBtn from "../components/Save-Button";
-import videoBG from "./assets/book-footage.mp4";
 import Spinner from 'react-bootstrap/Spinner'
 import "./assets/style.css";
 
@@ -133,14 +132,6 @@ class Search extends Component {
     render() {
         return (
             <Container fluid>
-                <video className="video-background" loop autoPlay muted playsInline
-                    style={{
-                        objectFit: 'cover',
-                        width: '100%',
-                        height: '100%',
-                    }}
-                    src={videoBG}>
-                </video>
                 <Row>
                     <Col size="md-12">
                         <div className="head-space" />

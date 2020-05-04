@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Card from "../components/Card";
 import Carousel from "../components/Carousel";
-import videoBG from "./assets/book-footage.mp4";
 import Spinner from 'react-bootstrap/Spinner';
 import API from '../utilities/api';
 
@@ -71,21 +70,13 @@ class Home extends Component {
       lastUpdated: new Date()
     }
     API.saveTopBooks(data)
-      .then(res => console.log(res.data))
+      .then()
       .catch(err => console.log(err));
   }
 
   render() {
     return (
       <Container fluid>
-        <video className="video-background" loop autoPlay playsInline muted
-          style={{
-            objectFit: 'cover',
-            width: '100%',
-            height: '100%',
-          }}
-          src={videoBG}>
-        </video>
         <Row>
           <Col size="md-12">
 
