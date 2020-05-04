@@ -14,6 +14,11 @@
     text-decoration: none;
     background-color: transparent;
   }
+  a:hover {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+  }
   .navbar {
     background-image:  linear-gradient(to bottom right, #373B44, #4286f4);
     min-height: 70px;

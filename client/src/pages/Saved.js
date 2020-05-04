@@ -20,6 +20,7 @@ class Search extends Component {
     componentDidMount() {
         this._isMounted = true;
         this.checkBookshelf();
+        document.title = "Google Books Search | Saved";
     }
     componentWillUnmount() {
         this._isMounted = false;

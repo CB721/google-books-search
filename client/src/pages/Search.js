@@ -25,6 +25,10 @@ class Search extends Component {
         uploading: false,
     };
 
+    componentWillMount() {
+        document.title = "Google Books Search | Search";
+    }
+
     searchBooks = query => {
         this.setState({ uploading: true })
         API.googleBook(query)

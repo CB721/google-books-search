@@ -19,6 +19,9 @@ class Home extends Component {
     lastUpdate: "",
   }
   UNSAFE_componentWillMount() {
+    // set title
+    document.title = "Google Books Search | Home";
+    // get all of top books
     API.getSavedTopBooks()
       .then(res => {
         const updateMonth = parseInt(res.data[0].lastUpdated.split("T")[0].split("-")[1]);
